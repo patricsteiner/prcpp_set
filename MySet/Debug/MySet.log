@@ -1,0 +1,5 @@
+﻿  MySet.cpp
+c:\users\patric\documents\visual studio 2015\projects\prcpp_set\myset\myset.cpp(25): warning C4018: '<': signed/unsigned mismatch
+c:\users\patric\documents\visual studio 2015\projects\prcpp_set\myset\myset.cpp(32): warning C4018: '<': signed/unsigned mismatch
+c:\users\patric\documents\visual studio 2015\projects\prcpp_set\myset\myset.cpp(35): warning C4715: 'Set::containsAll': not all control paths return a value
+  MySet.vcxproj -> c:\users\patric\documents\visual studio 2015\Projects\prcpp_set\Debug\MySet.lib
