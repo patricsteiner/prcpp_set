@@ -9,6 +9,28 @@ int& Set::operator[](size_t i) const {
 	return *(begin() + i);
 }
 
+bool Set::contains(const int e) const {
+	for (size_t i = 0; i < m_size; i++) {
+		if ((*this)[i] == e) return true;
+	}
+	return false;
+}
+
+bool Set::containsAll(const Set & set) const {
+	for (size_t i = 0; i < set.size(); i++) {
+		if (!contains(set[i])) return false;
+	}
+	return true;
+}
+
+bool Set::isEmpty() const {
+	return size() == 0;
+}
+
+size_t Set::size() const {
+	return m_size;
+}
+
 Set Set::merge(const Set & set) const {
 	// erstelle eine neue Menge mit allen Elementen von this
 	Set result(m_size + set.m_size);
@@ -21,23 +43,20 @@ Set Set::merge(const Set & set) const {
 	return result;
 }
 
-bool Set::contains(const int e) const {
-	for (int i = 0; i < m_size; i++) {
-		if (this[i] == e) return true;
+Set Set::difference(const Set & set) const {
+	int* newvalues = new int[set.size()];
+	int newsize = 0;
+	for (size_t i = 0; i < set.size(); ++i) {
+		if (!contains(set[i])) newvalues[newsize++] = set[i];
 	}
-	return false;
+	return * new Set(newvalues, newsize);
 }
 
-bool Set::containsAll(const Set & set) const {
-	for (int i = 0; i < set.size(); i++) {
-		if (!contains(set[i])) return false;
+Set Set::intersection(const Set & set) const {
+	int* newvalues = new int[set.size()];
+	int newsize = 0;
+	for (size_t i = 0; i < set.size(); ++i) {
+		if (contains(set[i])) newvalues[newsize++] = set[i];
 	}
-}
-
-bool Set::isEmpty() const {
-	return size() == 0;
-}
-
-size_t Set::size() const {
-	return m_size;
+	return *new Set(newvalues, newsize);
 }
