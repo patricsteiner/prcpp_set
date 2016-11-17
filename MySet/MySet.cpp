@@ -49,7 +49,21 @@ Set Set::difference(const Set & set) const {
 	for (size_t i = 0; i < set.size(); ++i) {
 		if (!contains(set[i])) newvalues[newsize++] = set[i];
 	}
-	return * new Set(newvalues, newsize);
+	return *new Set(newvalues, newsize);
+}
+
+Set Set::difference(Set&& set) const {
+	if (set.m_values.unique()) {
+		int* newvalues = new int[set.size()];
+		int newsize = 0;
+		for (size_t i = 0; i < set.size(); ++i) {
+			if (!contains(set[i])) newvalues[newsize++] = set[i];
+		}
+		set.m_values.reset(newvalues);
+		set.m_size = newsize;
+		return set;
+	}
+	else return difference(forward<Set&>(set));
 }
 
 Set Set::intersection(const Set & set) const {
@@ -59,4 +73,19 @@ Set Set::intersection(const Set & set) const {
 		if (contains(set[i])) newvalues[newsize++] = set[i];
 	}
 	return *new Set(newvalues, newsize);
+}
+
+Set Set::intersection(Set && set) const
+{
+	if (set.m_values.unique()) {
+		int* newvalues = new int[set.size()];
+		int newsize = 0;
+		for (size_t i = 0; i < set.size(); ++i) {
+			if (contains(set[i])) newvalues[newsize++] = set[i];
+		}
+		set.m_values.reset(newvalues);
+		set.m_size = newsize;
+		return set;
+	}
+	else return intersection(forward<Set&>(set));
 }

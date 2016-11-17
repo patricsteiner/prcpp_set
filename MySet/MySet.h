@@ -17,7 +17,9 @@ protected:
 	int& operator[](size_t i) const; // gibt das i-te Element des Mengen-Arrays // zurueck
 	Set merge(const Set& set) const; // gibt als neue Menge die Vereinigungs- // menge dieser Menge mit set zurueck
 	Set difference(const Set& set) const; // gibt als neue Menge die Differenzmenge // zwischen set und dieser Menge // (set \ this) zurueck
+	Set difference(Set&& set) const; // gibt als neue Menge die Differenzmenge // zwischen set und dieser Menge // (set \ this) zurueck
 	Set intersection(const Set& set) const; // gibt als neue Menge die Schnittmenge // dieser Menge mit set zurueck
+	Set intersection(Set&& set) const; // gibt als neue Menge die Schnittmenge // dieser Menge mit set zurueck
 
 public:
 	Set() : m_size(0) {
@@ -29,18 +31,21 @@ public:
 	}
 
 	Set(const int* values, const size_t size) : Set(size) {
-		cout << "type-convert-ctor" << endl;
+		cout << "type-convert-ctor, copy {";
 		for (size_t i = 0; i < size; i++) {
+			cout << values[i];
 			if (!contains(*(values + i))) {
 				(*this)[i] = *(values + i);
 				m_size++;
 			}
+			cout << (i + 1 < size ? ", " : "}");
 		}
+		cout << endl;
 	}
 
 	~Set() {
-		m_values.reset();
 		cout << "default-dtor" << endl;
+		m_values.reset();
 	}
 
 	// Instanzmethoden
@@ -66,6 +71,8 @@ public:
 	// Schnittmenge
 	static Set intersection(const Set& set1, const Set& set2) { return set1.intersection(set2); }
 
+
+	// Move-Semantik
 	// Differenzmenge set1\set2
 	static Set difference(const Set& set1, Set&& set2) { return set2.difference(move(set1)); }
 	static Set difference(Set&& set1, Set&& set2) { return set2.difference(move(set1)); }
