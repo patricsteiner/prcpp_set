@@ -13,7 +13,7 @@ protected:
 	}
 
 	// geschützte Instanzmethoden
-	int *begin() const; // gibt einen Zeiger auf das erste Element // der Menge zurueck (nullptr falls leer)
+	virtual int *begin() const; // gibt einen Zeiger auf das erste Element // der Menge zurueck (nullptr falls leer)
 	int& operator[](size_t i) const; // gibt das i-te Element des Mengen-Arrays // zurueck
 	Set merge(const Set& set) const; // gibt als neue Menge die Vereinigungs- // menge dieser Menge mit set zurueck
 	Set difference(const Set& set) const; // gibt als neue Menge die Differenzmenge // zwischen set und dieser Menge // (set \ this) zurueck

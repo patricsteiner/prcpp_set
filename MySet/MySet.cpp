@@ -44,6 +44,7 @@ Set Set::merge(const Set & set) const {
 }
 
 Set Set::difference(const Set & set) const {
+	cout << "difference without move semantics" << endl;
 	int* newvalues = new int[set.size()];
 	int newsize = 0;
 	for (size_t i = 0; i < set.size(); ++i) {
@@ -53,6 +54,7 @@ Set Set::difference(const Set & set) const {
 }
 
 Set Set::difference(Set&& set) const {
+	cout << "difference with move semantics" << endl;
 	if (set.m_values.unique()) {
 		int* newvalues = new int[set.size()];
 		int newsize = 0;
@@ -67,6 +69,7 @@ Set Set::difference(Set&& set) const {
 }
 
 Set Set::intersection(const Set & set) const {
+	cout << "intersection without move semantics" << endl;
 	int* newvalues = new int[set.size()];
 	int newsize = 0;
 	for (size_t i = 0; i < set.size(); ++i) {
@@ -75,8 +78,8 @@ Set Set::intersection(const Set & set) const {
 	return *new Set(newvalues, newsize);
 }
 
-Set Set::intersection(Set && set) const
-{
+Set Set::intersection(Set && set) const {
+	cout << "intersection with move semantics" << endl;
 	if (set.m_values.unique()) {
 		int* newvalues = new int[set.size()];
 		int newsize = 0;

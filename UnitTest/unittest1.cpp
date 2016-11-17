@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 
 #include "../MySet/MySet.h"
+#include "../MySet/OrderedSet.h"
 //#include "../MySet/OrderedSet.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -123,4 +124,49 @@ namespace UnitTest
 			Assert::IsTrue(s1.size() == s4.size());
 		}
 	};
+
+	TEST_CLASS(TestOrderedSet)
+	{
+	public:
+
+		TEST_METHOD(Creation)
+		{
+			OrderedSet s1;
+			OrderedSet s11(s1);
+			const int set2[] = { 1,2,3 };
+			OrderedSet s2(set2, sizeof(set2) / sizeof(int));
+			OrderedSet s21(s2);
+			OrderedSet s22 = s2;
+			const int set3[] = { 4,5,5,6 };
+			OrderedSet s3(set3, sizeof(set3) / sizeof(int));
+		}
+
+		TEST_METHOD(Contains)
+		{
+			const int set1[] = { 1,2,3 };
+			OrderedSet s1(set1, sizeof(set1) / sizeof(int));
+			Assert::IsTrue(s1.contains(2));
+			Assert::IsFalse(s1.contains(0));
+			Assert::IsFalse(OrderedSet().contains(1));
+
+			const int set2[] = { 2,1 };
+			OrderedSet s2(set2, sizeof(set2) / sizeof(int));
+			Assert::IsTrue(s1.containsAll(s2));
+			Assert::IsFalse(s2.containsAll(s1));
+			Assert::IsFalse(OrderedSet().containsAll(s1));
+			Assert::IsTrue(s1.containsAll(OrderedSet()));
+		}
+
+		TEST_METHOD(getSmaller)
+		{
+			const int set1[] = { 4,5,5,6,1,2,3 };
+			OrderedSet s1(set1, sizeof(set1) / sizeof(int));
+			const int set2[] = { 1,2,3 };
+			OrderedSet s2(set2, sizeof(set2) / sizeof(int));
+			OrderedSet s3 = s1.getSmaller(4);
+			cout << s3 << endl;
+			Assert::IsTrue(s1.containsAll(s2) && s3.containsAll(s1));
+		}
+	};
+
 }
