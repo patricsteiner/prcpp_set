@@ -15,11 +15,12 @@ public:
 	}
 
 	OrderedSet(const int* values, const size_t size) : Set(values, size), m_start(0) {
-		cout << "OrderedSet: type-convert-ctor";
+		cout << "OrderedSet: type-convert-ctor" << endl;
 		int * beg = begin(); std::sort(beg, beg + m_size);
 	}
 
 	OrderedSet(OrderedSet set, int start, int size) : OrderedSet(set) {
+		cout << "OrderedSet: Special-ctor" << endl;
 		m_size = size;
 		m_start = start;
 	}

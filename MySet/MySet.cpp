@@ -10,7 +10,7 @@ int& Set::operator[](size_t i) const {
 }
 
 bool Set::contains(const int e) const {
-	for (size_t i = 0; i < m_size; i++) {
+	for (size_t i = 0; i < size(); i++) {
 		if ((*this)[i] == e) return true;
 	}
 	return false;

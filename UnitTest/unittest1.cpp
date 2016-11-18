@@ -159,13 +159,17 @@ namespace UnitTest
 
 		TEST_METHOD(getSmaller)
 		{
-			const int set1[] = { 4,5,5,6,1,2,3 };
+			const int set1[] = { 4,5,6,1,2,3 };
 			OrderedSet s1(set1, sizeof(set1) / sizeof(int));
 			const int set2[] = { 1,2,3 };
 			OrderedSet s2(set2, sizeof(set2) / sizeof(int));
 			OrderedSet s3 = s1.getSmaller(4);
-			cout << s3 << endl;
-			Assert::IsTrue(s1.containsAll(s2) && s3.containsAll(s1));
+			Assert::IsTrue(s3.contains(1));
+			Assert::IsTrue(s3.contains(2));
+			Assert::IsTrue(s3.contains(3));
+			Assert::IsFalse(s3.contains(4));
+			Assert::IsTrue(s1.containsAll(s2));
+			Assert::IsTrue(s3.containsAll(s2));
 		}
 	};
 
