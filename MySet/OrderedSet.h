@@ -5,6 +5,7 @@ class OrderedSet : public Set {
 protected:
 	size_t m_start;
 	virtual int *begin() const override;
+	virtual Set merge(const Set& set) const override;
 public:
 	OrderedSet() : Set(), m_start(0) {
 		cout << "OrderedSet: default-ctor" << endl;

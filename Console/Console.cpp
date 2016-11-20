@@ -6,6 +6,16 @@
 using namespace std;
 
 int main() {
+	const int set1[] = { 1,2,3 };
+	OrderedSet s1(set1, sizeof(set1) / sizeof(int));
+	const int set2[] = { 3,4,5 };
+	OrderedSet s2(set2, sizeof(set2) / sizeof(int));
+	OrderedSet s3 = Set::merge(s1, s2);
+	cout << "YYYYYYY "  << s3 << endl;
+	return 0;
+}
+
+int main4() {
 	const int set1[] = { 4,5,6,1,2,3 };
 	OrderedSet s1(set1, sizeof(set1) / sizeof(int));
 	const int set2[] = { 1,2,3 };
@@ -14,6 +24,7 @@ int main() {
 	cout << "XXX" << s2 << endl;
 	cout << "XXX" << s3 << endl;
 	cout << boolalpha << s2.contains(1) << endl;
+	return 0;
 }
 
 int main3() {
@@ -24,6 +35,7 @@ int main3() {
 	cout << s << endl;
 	return 0;
 }
+
 int main2() {
 	Set s1;
 	Set s11(s1);
