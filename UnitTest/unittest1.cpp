@@ -169,7 +169,21 @@ namespace UnitTest
 			Assert::IsTrue(s3.contains(3));
 			Assert::IsFalse(s3.contains(4));
 			Assert::IsTrue(s1.containsAll(s2));
-			Assert::IsTrue(s3.containsAll(s2));
+			Assert::IsTrue(s3.containsAll(s2) && s3.size() == 3);
+		}
+
+		TEST_METHOD(getLarger)
+		{
+			const int set1[] = { 4,5,6,1,2,3 };
+			OrderedSet s1(set1, sizeof(set1) / sizeof(int));
+			const int set2[] = { 5,6 };
+			OrderedSet s2(set2, sizeof(set2) / sizeof(int));
+			OrderedSet s3 = s1.getLarger(4);
+			Assert::IsTrue(s3.contains(5));
+			Assert::IsTrue(s3.contains(6));
+			Assert::IsFalse(s3.contains(4));
+			Assert::IsTrue(s1.containsAll(s2));
+			Assert::IsTrue(s3.containsAll(s2) && s3.size() == 2);
 		}
 
 		TEST_METHOD(merge) {
