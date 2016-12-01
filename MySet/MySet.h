@@ -13,13 +13,13 @@ protected:
 	}
 
 	// geschützte Instanzmethoden
-	virtual int *begin() const; // gibt einen Zeiger auf das erste Element // der Menge zurueck (nullptr falls leer)
-	int& operator[](size_t i) const; // gibt das i-te Element des Mengen-Arrays // zurueck
-	virtual Set merge(const Set& set) const; // gibt als neue Menge die Vereinigungs- // menge dieser Menge mit set zurueck
-	Set difference(const Set& set) const; // gibt als neue Menge die Differenzmenge // zwischen set und dieser Menge // (set \ this) zurueck
-	Set difference(Set&& set) const; // gibt als neue Menge die Differenzmenge // zwischen set und dieser Menge // (set \ this) zurueck
-	Set intersection(const Set& set) const; // gibt als neue Menge die Schnittmenge // dieser Menge mit set zurueck
-	Set intersection(Set&& set) const; // gibt als neue Menge die Schnittmenge // dieser Menge mit set zurueck
+	virtual int *begin() const; // gibt einen Zeiger auf das erste Element der Menge zurueck (nullptr falls leer)
+	int& operator[](size_t i) const; // gibt das i-te Element des Mengen-Arrays zurueck
+	virtual Set merge(const Set& set) const; // gibt als neue Menge die Vereinigungs- menge dieser Menge mit set zurueck
+	Set difference(const Set& set) const; // gibt als neue Menge die Differenzmenge zwischen set und dieser Menge (set \ this) zurueck
+	Set difference(Set&& set) const; // gibt als neue Menge die Differenzmenge zwischen set und dieser Menge (set \ this) zurueck
+	Set intersection(const Set& set) const; // gibt als neue Menge die Schnittmenge dieser Menge mit set zurueck
+	Set intersection(Set&& set) const; // gibt als neue Menge die Schnittmenge dieser Menge mit set zurueck
 
 public:
 	Set() : m_size(0) {
