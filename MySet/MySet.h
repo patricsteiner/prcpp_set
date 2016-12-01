@@ -13,13 +13,14 @@ protected:
 	}
 
 	// geschützte Instanzmethoden
-	virtual int *begin() const; // gibt einen Zeiger auf das erste Element // der Menge zurueck (nullptr falls leer)
-	int& operator[](size_t i) const; // gibt das i-te Element des Mengen-Arrays // zurueck
-	virtual Set merge(const Set& set) const; // gibt als neue Menge die Vereinigungs- // menge dieser Menge mit set zurueck
-	Set difference(const Set& set) const; // gibt als neue Menge die Differenzmenge // zwischen set und dieser Menge // (set \ this) zurueck
-	Set difference(Set&& set) const; // gibt als neue Menge die Differenzmenge // zwischen set und dieser Menge // (set \ this) zurueck
-	Set intersection(const Set& set) const; // gibt als neue Menge die Schnittmenge // dieser Menge mit set zurueck
-	Set intersection(Set&& set) const; // gibt als neue Menge die Schnittmenge // dieser Menge mit set zurueck
+	virtual int *begin() const; // gibt einen Zeiger auf das erste Element der Menge zurueck (nullptr falls leer)
+	int& operator[](size_t i); // gibt das i-te Element des Mengen-Arrays zurueck
+	int operator[](size_t i) const; // gibt das i-te Element des Mengen-Arrays zurueck
+	virtual Set merge(const Set& set) const; // gibt als neue Menge die Vereinigungs- menge dieser Menge mit set zurueck
+	Set difference(const Set& set) const; // gibt als neue Menge die Differenzmenge zwischen set und dieser Menge (set \ this) zurueck
+	Set difference(Set&& set) const; // gibt als neue Menge die Differenzmenge zwischen set und dieser Menge (set \ this) zurueck
+	Set intersection(const Set& set) const; // gibt als neue Menge die Schnittmenge dieser Menge mit set zurueck
+	Set intersection(Set&& set) const; // gibt als neue Menge die Schnittmenge dieser Menge mit set zurueck
 
 public:
 	Set() : m_size(0) {
@@ -74,7 +75,7 @@ public:
 
 	// Move-Semantik
 	// Differenzmenge set1\set2
-	static Set difference(const Set& set1, Set&& set2) { return set2.difference(move(set1)); }
+	static Set difference(Set&& set1, const Set& set2) { return set2.difference(move(set1)); }
 	static Set difference(Set&& set1, Set&& set2) { return set2.difference(move(set1)); }
 	// Schnittmenge
 	static Set intersection(const Set& set1, Set&& set2) { return set1.intersection(move(set2)); }
