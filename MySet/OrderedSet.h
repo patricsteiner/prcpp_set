@@ -11,6 +11,8 @@ public:
 		cout << "OrderedSet: default-ctor" << endl;
 	}
 
+	OrderedSet(const size_t size) : Set(size), m_start(0) {}
+
 	OrderedSet(const Set& set) : Set(set), m_start(0) {
 		cout << "OrderedSet: copy-ctor" << endl;
 	}

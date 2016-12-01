@@ -5,7 +5,11 @@ int* Set::begin() const {
 	return m_values.get() ? m_values.get() : nullptr;
 }
 
-int& Set::operator[](size_t i) const {
+int& Set::operator[](size_t i) {
+	return *(begin() + i);
+}
+
+int Set::operator[](size_t i) const {
 	return *(begin() + i);
 }
 
@@ -56,12 +60,10 @@ Set Set::difference(const Set & set) const {
 Set Set::difference(Set&& set) const {
 	cout << "difference with move semantics" << endl;
 	if (set.m_values.unique()) {
-		int* newvalues = new int[set.size()];
 		int newsize = 0;
 		for (size_t i = 0; i < set.size(); ++i) {
-			if (!contains(set[i])) newvalues[newsize++] = set[i];
+			if (!contains(set[i])) set.m_values.get()[newsize++] = set[i];
 		}
-		set.m_values.reset(newvalues);
 		set.m_size = newsize;
 		return set;
 	}
@@ -81,12 +83,10 @@ Set Set::intersection(const Set & set) const {
 Set Set::intersection(Set && set) const {
 	cout << "intersection with move semantics" << endl;
 	if (set.m_values.unique()) {
-		int* newvalues = new int[set.size()];
 		int newsize = 0;
 		for (size_t i = 0; i < set.size(); ++i) {
-			if (contains(set[i])) newvalues[newsize++] = set[i];
+			if (contains(set[i])) set.m_values.get()[newsize++] = set[i];
 		}
-		set.m_values.reset(newvalues);
 		set.m_size = newsize;
 		return set;
 	}
